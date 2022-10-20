@@ -64,7 +64,7 @@ type heartbeat struct {
 }
 
 // 获取全局数据及心跳
-func getGlobaldata() {
+func GetGlobalData() {
 	v := tools.NetTcp()
 	heartbeatdata := heartbeat{Jsonrpc: "2.0", Method: "NoOp", Params: map[string]string{}}
 	go func() {
@@ -454,7 +454,7 @@ func DeviceInfor() {
 }
 
 func Run() {
-	go getGlobaldata()
+	//go GetGlobalData()
 	go MonitorPageState()
 	//DevicePosition()
 	//RemoteListen(true)

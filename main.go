@@ -104,10 +104,25 @@ func Login(c *gin.Context) {
 	})
 }
 
+func MonitorPageState(c *gin.Context) {
+	qsc.MonitorPageState()
+	c.JSON(http.StatusOK, gin.H{
+		"msg": "操作成功",
+	})
+}
+func GetGlobalData(c *gin.Context) {
+	qsc.GetGlobalData()
+	c.JSON(http.StatusOK, gin.H{
+		"msg": "操作成功",
+	})
+}
+
 func main() {
 	r := setUp()
 	r.GET("/demo", demo1)
 	r.GET("/demo2", demo2)
 	r.POST("/demo3", Login)
+	r.POST("/demo4", MonitorPageState)
+	r.POST("/demo5", GetGlobalData)
 	r.Run(":8090")
 }
