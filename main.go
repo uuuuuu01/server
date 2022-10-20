@@ -52,9 +52,16 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"server/methods"
+	"server/qsc"
 )
+
+type Mss struct {
+	Name     string `json:"username"`
+	Password string `json:"password"`
+}
 
 func setUp() *gin.Engine {
 	r := gin.Default()
@@ -72,10 +79,35 @@ func demo2(c *gin.Context) {
 		"msg": e,
 	})
 }
+func demo3(c *gin.Context) {
+	t := Mss{}
+
+	c.JSON(http.StatusOK, gin.H{
+		"msg": t.Name,
+	})
+}
+
+type User struct {
+	Line     string `json:"line"`
+	DeviceId string `json:"deviceId"`
+	Comm     string `json:"comm"`
+}
+
+func Login(c *gin.Context) {
+	json := User{}
+	c.BindJSON(&json)
+	log.Printf("%v", &json)
+	qsc.RemoteListen(json.Line, json.DeviceId, json.Comm)
+	c.JSON(http.StatusOK, gin.H{
+		"name":     json.Line,
+		"password": json.DeviceId,
+	})
+}
 
 func main() {
 	r := setUp()
 	r.GET("/demo", demo1)
 	r.GET("/demo2", demo2)
+	r.POST("/demo3", Login)
 	r.Run(":8090")
 }

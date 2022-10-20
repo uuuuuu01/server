@@ -202,7 +202,7 @@ func Getfaildevice(s socketio.Conn, courtid string) {
 }
 
 // 用于打开远程监听
-func Listenopen(s socketio.Conn, line string, deviceid string, comm string) {
+func Listenopen(line string, deviceid string, comm string) {
 	qsc.RemoteListen(line, deviceid, comm)
 }
 
