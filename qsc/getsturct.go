@@ -191,8 +191,8 @@ func RemoteListen(line string, deviceid string, comm string) {
 		Controls []map[string]interface{}
 	}
 	if comm == "open" {
-		h := strings.Split(line, " ")
-		command = append(command, map[string]interface{}{"Name": "channelSelect", "Value": h[1]})
+		h := line
+		command = append(command, map[string]interface{}{"Name": "channelSelect", "Value": h})
 		fmt.Println(11111, command)
 		c := Header{Jsonrpc: "2.0", Id: 1234, Method: "Component.Set", Params: devicePositionsub{
 			Name: "web_remoteMonitor_" + deviceid, Controls: command}}
