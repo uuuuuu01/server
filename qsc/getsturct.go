@@ -38,7 +38,7 @@ type sumitrequest struct {
 	Rate int
 }
 
-// 接收处理器回复的确认信息
+// Returnmsg 接收处理器回复的确认信息
 type Returnmsg struct {
 	Jsonrpc string `json:"jsonrpc"`
 	Result  bool   `json:"result"`
