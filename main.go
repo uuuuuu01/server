@@ -52,7 +52,6 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 	"server/methods"
 	"server/qsc"
@@ -74,7 +73,8 @@ func demo1(c *gin.Context) {
 	})
 }
 func demo2(c *gin.Context) {
-	e := methods.Devicelocation("1")
+	courtId := c.Query("courtId")
+	e := methods.Devicelocation(courtId)
 	c.JSON(http.StatusOK, gin.H{
 		"msg": e,
 	})
@@ -93,10 +93,9 @@ type User struct {
 	Comm     string `json:"comm"`
 }
 
-func Login(c *gin.Context) {
+func RemoteListen(c *gin.Context) {
 	json := User{}
 	c.BindJSON(&json)
-	log.Printf("%v", &json)
 	qsc.RemoteListen(json.Line, json.DeviceId, json.Comm)
 	c.JSON(http.StatusOK, gin.H{
 		"name":     json.Line,
@@ -121,8 +120,8 @@ func main() {
 	r := setUp()
 	r.GET("/demo", demo1)
 	r.GET("/demo2", demo2)
-	r.POST("/demo3", Login)
-	r.POST("/demo4", MonitorPageState)
+	r.POST("/remoteListen", RemoteListen)
+	r.GET("/location", MonitorPageState)
 	r.POST("/demo5", GetGlobalData)
 	r.Run(":8090")
 }
