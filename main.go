@@ -149,5 +149,9 @@ func main() {
 	r.POST("/remoteListen", RemoteListen)
 	r.GET("/location", MonitorPageState)
 	r.POST("/demo5", GetGlobalData)
+	r.GET("/IndexGetFaultLine", methods.IndexGetFaultLine)
+	r.GET("/IndexGetOnLineTime", methods.IndexGetOnLineTime)
+	r.GET("/GetCourtInfo", methods.GetCourtInfo)
+	r.GET("/GetZoneInfo", methods.GetZoneInfo)
 	r.Run(":8090")
 }

@@ -30,6 +30,14 @@ type FyDeviceInfor struct {
 	DeviceState string //设备状态 0代表故障，1代表正常
 }
 
+// 设备通道表
+type FyDeviceTime struct {
+	ID          uint      `gorm:"primarykey"`
+	DeviceId    string    `gorm:"device_id"`    //设备ID
+	OnlineTime  time.Time `gorm:"online_time"`  //通道名称
+	OutlineTime time.Time `gorm:"outline_time"` //处理器中通道名称
+}
+
 // FyDeviceChannel 设备通道表
 type FyDeviceChannel struct {
 	ID          uint   `gorm:"primarykey"`
