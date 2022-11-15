@@ -140,7 +140,7 @@ func Getfaillogs(s socketio.Conn) {
 	s.Emit("recvfailLogs", faillogs)
 }
 
-// 用于获取监测管理页面初始数据
+// Monitorinit 用于获取监测管理页面初始数据
 func Monitorinit(s socketio.Conn, token string) {
 	user, err := ParseToken(token)
 	if err != nil {
@@ -176,7 +176,7 @@ func Monitorinit(s socketio.Conn, token string) {
 	s.Emit("monitorinit", courtdata)
 }
 
-// 用于监测页面的故障日志添加接口
+// Monitorerrinput 用于监测页面的故障日志添加接口
 func Monitorerrinput(s socketio.Conn, courtid string, errinput string, token string, deviceid string) {
 	user, err := ParseToken(token)
 	if err != nil {
@@ -194,31 +194,31 @@ func Monitorerrinput(s socketio.Conn, courtid string, errinput string, token str
 
 }
 
-// 用于获取故障状态中的设备列表
+// Getfaildevice 用于获取故障状态中的设备列表
 func Getfaildevice(s socketio.Conn, courtid string) {
 	var device []tools.FyDeviceInfor
 	tools.DB.Where("court_id = ?", courtid).Find(&device)
 	s.Emit("recvdevicelist", device)
 }
 
-// 用于打开远程监听
+// Listenopen 用于打开远程监听
 func Listenopen(line string, deviceid string, comm string) {
 	qsc.RemoteListen(line, deviceid, comm)
 }
 
-// 故障处理页面获取页面信息方法
+// Failrepair 故障处理页面获取页面信息方法
 func Failrepair(s socketio.Conn, courtid string) {
 	var failinfor []tools.FyFaillogs
 	tools.DB.Where("courtid = ? and repair = ?", courtid, "0").Find(&failinfor)
 	s.Emit("recvfailinfor", failinfor)
 }
 
-// 用于关闭远程监听方法
+// Closeycjtbtn 用于关闭远程监听方法
 func Closeycjtbtn(s socketio.Conn) {
 	qsc.CloseFeeds("changegroup_3", s)
 }
 
-// 用于下载文件列表
+// Downfileinit 用于下载文件列表
 func Downfileinit(s socketio.Conn, courtid string) {
 	var filelist []tools.FyDownFile
 	tools.DB.Where("courtid =?", courtid).Find(&filelist)
@@ -228,7 +228,7 @@ func Downfileinit(s socketio.Conn, courtid string) {
 	s.Emit("downfileinit", filelist)
 }
 
-// 用于获取主页的统计数据
+// Getindexcourt 用于获取主页的统计数据
 func Getindexcourt(s socketio.Conn) {
 	reportcourt := []int{}
 	processcourt := []int{}

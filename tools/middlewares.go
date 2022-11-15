@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// 跨域方法
+// Cros 跨域方法
 func Cros() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.Request.Header.Get("Origin") //请求头部
@@ -15,7 +15,6 @@ func Cros() gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Accept, Authorization, Content-Type, Content-Length, X-CSRF-Token, Token, session, Origin, Host, Connection, Accept-Encoding, Accept-Language, X-Requested-With")
 
 		if c.Request.Method == http.MethodOptions {
-			c.AbortWithStatus(http.StatusNoContent)
 			return
 		}
 		c.Request.Header.Del("Origin")

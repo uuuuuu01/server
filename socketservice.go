@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	socketio "github.com/googollee/go-socket.io"
+	"github.com/googollee/go-socket.io"
 	"log"
 	"net/http"
 	"server/methods"
@@ -14,6 +14,7 @@ import (
 //socketio.Broadcast.SendAll()
 
 // 用于SOCKET io方法
+
 func SocketIo() {
 	router := gin.New()
 	server := socketio.NewServer(nil)

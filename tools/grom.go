@@ -19,7 +19,7 @@ type FyCourtInfor struct {
 	CourtSort  int    //区域排序
 }
 
-// 设备表
+// FyDeviceInfor 设备表
 type FyDeviceInfor struct {
 	ID          uint   `gorm:"primarykey"`
 	CourtID     string //法院设备ID
@@ -30,7 +30,7 @@ type FyDeviceInfor struct {
 	DeviceState string //设备状态 0代表故障，1代表正常
 }
 
-// 设备通道表
+// FyDeviceChannel 设备通道表
 type FyDeviceChannel struct {
 	ID          uint   `gorm:"primarykey"`
 	Deviceid    string //设备ID
@@ -38,7 +38,7 @@ type FyDeviceChannel struct {
 	ChannelCode string //处理器中通道名称
 }
 
-// 法院文档
+// FyDownFile 法院文档
 type FyDownFile struct {
 	ID           uint   `gorm:"primarykey"`
 	Courtid      string //法院ID
@@ -48,7 +48,7 @@ type FyDownFile struct {
 	Filetype     string //文件类型
 }
 
-// 用于区域法院
+// FyZoneInfor 用于区域法院
 type FyZoneInfor struct {
 	ID       uint   `gorm:"primarykey"`
 	ZoneID   string //与fyCourtInfor里的CourtZone关联
@@ -56,7 +56,7 @@ type FyZoneInfor struct {
 	ZoneSort int    //区域排序
 }
 
-// 用于导航菜单及其权限，0代表只管理员访问，1代表区域可访问，2代表所有用户可访问
+// FyNavigateMenu 用于导航菜单及其权限，0代表只管理员访问，1代表区域可访问，2代表所有用户可访问
 type FyNavigateMenu struct {
 	ID             uint   `gorm:"primarykey"`
 	MenuName       string //菜单名
@@ -65,7 +65,7 @@ type FyNavigateMenu struct {
 	MenuSort       int    //菜单排序
 }
 
-// 用户表，权限0代表管理员1代表区域2代表用户
+// FyUsers 用户表，权限0代表管理员1代表区域2代表用户
 type FyUsers struct {
 	ID         uint   `gorm:"primarykey"`
 	UserId     int    //用户ID
@@ -76,7 +76,7 @@ type FyUsers struct {
 	ZoneID     string //存储区域ID与区域名关联
 }
 
-// 用于系统日志记录
+// FySystemlogs 用于系统日志记录
 type FySystemlogs struct {
 	ID       uint   `gorm:"primarykey"`
 	Time     string //时间
@@ -85,7 +85,7 @@ type FySystemlogs struct {
 	Content  string //日志内容
 }
 
-// 用于故障日志
+// FyFaillogs 用于故障日志
 type FyFaillogs struct {
 	ID             uint   `gorm:"primarykey"`
 	Failid         string //故障ID
@@ -100,9 +100,9 @@ type FyFaillogs struct {
 	Repair         string //修复状态 0代表代修复，1代表完成
 }
 
-// 实现数据库的连接
+// DatabaseConn 实现数据库的连接
 func DatabaseConn() *gorm.DB {
-	dsn := "jcqljy:Baby0802@tcp(rm-8vb6619d5587u0c9jfo.mysql.zhangbei.rds.aliyuncs.com:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
+	dsn := "axax:Axax1234@tcp(rm-8vb6619d5587u0c9jfo.mysql.zhangbei.rds.aliyuncs.com:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	sqlDB, err := db.DB()
 	sqlDB.SetMaxIdleConns(50)  //空闲连接数
@@ -115,9 +115,9 @@ func DatabaseConn() *gorm.DB {
 	return db
 }
 
-// 实现数据库的初始建表工作
+// DatabaseInit 实现数据库的初始建表工作
 func DatabaseInit() *gorm.DB {
-	dsn := "jcqljy:Baby0802@tcp(rm-8vb6619d5587u0c9jfo.mysql.zhangbei.rds.aliyuncs.com:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
+	dsn := "axax:Axax1234@tcp(rm-8vb6619d5587u0c9jfo.mysql.zhangbei.rds.aliyuncs.com:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Println("数据库连接失败")

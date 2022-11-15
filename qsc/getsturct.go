@@ -164,8 +164,8 @@ func DevicePosition(courtid string) Returnmsg {
 		Name: "web_remoteMonitor_" + courtid, Controls: ds}}
 	fmt.Println(d)
 	jsona, _ := json.Marshal(d)
-	v.Conn.Write([]byte(string(jsona) + "\x00"))
 	var x [1024]byte
+	fmt.Println(string(jsona))
 	readSize, _ := v.Conn.Read(x[0:])
 	json.Unmarshal(x[0:readSize], &msg)
 	if msg.Result {
@@ -455,7 +455,7 @@ func DeviceInfor() {
 }
 
 func Run() {
-	//go GetGlobalData()
+	go GetGlobalData()
 	go MonitorPageState()
 	//DevicePosition()
 	//RemoteListen(true)
