@@ -148,7 +148,7 @@ func main() {
 	r.GET("/demo2", demo2)
 	r.POST("/remoteListen", RemoteListen)
 	r.GET("/location", MonitorPageState)
-	r.POST("/demo5", GetGlobalData)
+	r.GET("/demo5", GetGlobalData)
 	r.GET("/IndexGetFaultLine", methods.IndexGetFaultLine)
 	r.GET("/IndexGetOnLineTime", methods.IndexGetOnLineTime)
 	r.GET("/GetCourtInfo", methods.GetCourtInfo)
