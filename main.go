@@ -154,5 +154,6 @@ func main() {
 	r.GET("/GetCourtInfo", methods.GetCourtInfo)
 	r.GET("/GetZoneInfo", methods.GetZoneInfo)
 	r.GET("/GetStatus", qsc.GetStatus)
+	r.GET("/DeviceInfor", qsc.DeviceInfor)
 	r.Run(":8090")
 }

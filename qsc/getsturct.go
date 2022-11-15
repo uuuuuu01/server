@@ -412,7 +412,7 @@ func CloseFeeds(context string, s socketio.Conn) {
 }
 
 // 获取设备信息
-func DeviceInfor() {
+func DeviceInfor(ctx *gin.Context) {
 	type s struct {
 		Id   string
 		Rate float32
@@ -442,6 +442,7 @@ func DeviceInfor() {
 	readSize, _ := v.Conn.Read(x[0:])
 	json.Unmarshal(x[0:readSize], &msg)
 	if msg.Result {
+		fmt.Println(msg)
 		fmt.Println("通道数据设定成功")
 		b := Header{Jsonrpc: "2.0", Id: 1234, Method: "ChangeGroup.AutoPoll", Params: s{Id: "changegroup_3", Rate: 1}}
 		jsona, _ = json.Marshal(b)
@@ -470,6 +471,9 @@ func DeviceInfor() {
 		fmt.Println("通道数据设定不成功")
 	}
 	defer v.Conn.Close()
+	ctx.JSON(http.StatusOK, gin.H{
+		"msg": msg,
+	})
 }
 
 func Run() {
