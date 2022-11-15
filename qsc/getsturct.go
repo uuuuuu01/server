@@ -146,6 +146,7 @@ func GetGlobalData() {
 
 // 用于设备定位
 func DevicePosition(courtid string) Returnmsg {
+	fmt.Println("收到" + courtid + "定位请求")
 	v := tools.NetTcp()
 	var msg Returnmsg
 	type devicePositionsub struct {

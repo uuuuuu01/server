@@ -102,7 +102,7 @@ type FyFaillogs struct {
 
 // 实现数据库的连接
 func DatabaseConn() *gorm.DB {
-	dsn := "root:iloveyou@tcp(127.0.0.1:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
+	dsn := "jcqljy:Baby0802@tcp(rm-8vb6619d5587u0c9jfo.mysql.zhangbei.rds.aliyuncs.com:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	sqlDB, err := db.DB()
 	sqlDB.SetMaxIdleConns(50)  //空闲连接数
@@ -117,7 +117,7 @@ func DatabaseConn() *gorm.DB {
 
 // 实现数据库的初始建表工作
 func DatabaseInit() *gorm.DB {
-	dsn := "root:iloveyou@tcp(127.0.0.1:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
+	dsn := "jcqljy:Baby0802@tcp(rm-8vb6619d5587u0c9jfo.mysql.zhangbei.rds.aliyuncs.com:3306)/audiosystem?charset=utf8&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Println("数据库连接失败")
