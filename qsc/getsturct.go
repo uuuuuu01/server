@@ -2,10 +2,12 @@ package qsc
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	socketio "github.com/googollee/go-socket.io"
 	"log"
 	"net"
+	"net/http"
 	"server/tools"
 	"strings"
 	"time"
@@ -61,6 +63,22 @@ type heartbeat struct {
 	Jsonrpc string            `json:"jsonrpc"`
 	Method  string            `json:"method"`
 	Params  map[string]string `json:"params"`
+}
+
+func GetStatus(ctx *gin.Context) {
+	v := tools.NetTcp()
+	a := Header{Jsonrpc: "2.0", Id: 1234, Method: "StatusGet",
+		Params: 0}
+	jsona, _ := json.Marshal(a)
+	v.Conn.Write([]byte(string(jsona) + "\x00"))
+	var x [1024]byte
+	var msg Returnmsg
+	readSize, _ := v.Conn.Read(x[0:])
+	json.Unmarshal(x[0:readSize], &msg)
+	fmt.Println(msg)
+	ctx.JSON(http.StatusOK, gin.H{
+		"msg": msg,
+	})
 }
 
 // 获取全局数据及心跳

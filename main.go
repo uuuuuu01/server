@@ -153,5 +153,6 @@ func main() {
 	r.GET("/IndexGetOnLineTime", methods.IndexGetOnLineTime)
 	r.GET("/GetCourtInfo", methods.GetCourtInfo)
 	r.GET("/GetZoneInfo", methods.GetZoneInfo)
+	r.GET("/GetStatus", qsc.GetStatus)
 	r.Run(":8090")
 }
