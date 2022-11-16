@@ -182,6 +182,7 @@ func DevicePosition(courtid string) Returnmsg {
 		Name: "web_remoteMonitor_" + courtid, Controls: ds}}
 	fmt.Println(d)
 	jsona, _ := json.Marshal(d)
+	v.Conn.Write([]byte(string(jsona) + "\x00"))
 	var x [1024]byte
 	fmt.Println(string(jsona))
 	readSize, _ := v.Conn.Read(x[0:])
@@ -220,6 +221,7 @@ func RemoteListen(line string, deviceid string, comm string) {
 		readSize, _ := v.Conn.Read(x[0:])
 		json.Unmarshal(x[0:readSize], &msg)
 		if msg.Result {
+			fmt.Println(msg)
 			fmt.Println("通道切换成功")
 			// 用于通道静音开启
 			command = append(command[:0], command[1:]...)
@@ -441,6 +443,7 @@ func DeviceInfor(ctx *gin.Context) {
 	v.Conn.Write([]byte(string(jsona) + "\x00"))
 	readSize, _ := v.Conn.Read(x[0:])
 	json.Unmarshal(x[0:readSize], &msg)
+	fmt.Println(msg)
 	if msg.Result {
 		fmt.Println(msg)
 		fmt.Println("通道数据设定成功")
@@ -462,6 +465,7 @@ func DeviceInfor(ctx *gin.Context) {
 					}
 				}
 				time.Sleep(300 * time.Millisecond)
+				fmt.Println(QscData)
 			}
 		} else {
 			fmt.Println("订阅失败")

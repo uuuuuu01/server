@@ -14,7 +14,7 @@ var Pools []Qnet
 
 func NetTcp() Qnet {
 	//192.168.100.200
-	conn, _ := net.Dial("tcp", "10.0.0.201:5001")
+	conn, _ := net.Dial("tcp", "10.0.0.201:1710")
 	var x [1024]byte
 	_, _ = conn.Read(x[0:])
 	return Qnet{Conn: conn}
