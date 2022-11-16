@@ -182,6 +182,7 @@ func DevicePosition(courtid string) Returnmsg {
 		Name: "web_remoteMonitor_" + courtid, Controls: ds}}
 	fmt.Println(d)
 	jsona, _ := json.Marshal(d)
+	v.Conn.Write([]byte(string(jsona) + "\x00"))
 	var x [1024]byte
 	fmt.Println(string(jsona))
 	readSize, _ := v.Conn.Read(x[0:])
