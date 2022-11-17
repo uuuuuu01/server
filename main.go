@@ -141,6 +141,13 @@ func GetGlobalData(c *gin.Context) {
 		"msg": "操作成功",
 	})
 }
+func send(c *gin.Context) {
+	msg := c.Query("msg")
+	res := qsc.Send(msg)
+	c.JSON(http.StatusOK, gin.H{
+		"msg": res,
+	})
+}
 
 func main() {
 	r := setUp()
@@ -155,5 +162,6 @@ func main() {
 	r.GET("/GetZoneInfo", methods.GetZoneInfo)
 	r.GET("/GetStatus", qsc.GetStatus)
 	r.GET("/DeviceInfor", qsc.DeviceInfor)
+	r.GET("/send", send)
 	r.Run(":8090")
 }

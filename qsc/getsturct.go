@@ -195,6 +195,28 @@ func DevicePosition(courtid string) Returnmsg {
 	return msg
 }
 
+func Send(sendMsg string) string {
+	v := tools.NetTcp()
+	var msg Returnmsg
+	v.Conn.Write([]byte(string(sendMsg) + "\x00"))
+	var x [1024]byte
+	readSize, _ := v.Conn.Read(x[0:])
+	json.Unmarshal(x[0:readSize], &msg)
+	b := Header{Jsonrpc: "2.0", Id: 1234, Method: "ChangeGroup.AutoPoll", Params: sumitrequest{Id: "changegroup_3", Rate: 3}}
+	jsonb, _ := json.Marshal(b)
+	time.Sleep(200 * time.Millisecond)
+	var sb [4096]byte
+	//发送自动订阅指令
+	v.Conn.Write([]byte(string(jsonb) + "\x00"))
+	_, _ = v.Conn.Read(sb[0:])
+	for {
+		time.Sleep(2000 * time.Millisecond)
+		readSize2, _ := v.Conn.Read(sb[0:])
+		s := string(sb[0:readSize2])
+		return s
+	}
+}
+
 // 实现远程监听功能,要传通道，设备ID，还有开启关闭
 func RemoteListen(line string, deviceid string, comm string) {
 	if len(deviceid) == 1 {
