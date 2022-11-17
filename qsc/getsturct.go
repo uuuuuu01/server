@@ -202,18 +202,10 @@ func Send(sendMsg string) string {
 	var x [1024]byte
 	readSize, _ := v.Conn.Read(x[0:])
 	json.Unmarshal(x[0:readSize], &msg)
-	b := Header{Jsonrpc: "2.0", Id: 1234, Method: "ChangeGroup.AutoPoll", Params: sumitrequest{Id: "changegroup_3", Rate: 3}}
-	jsonb, _ := json.Marshal(b)
-	time.Sleep(200 * time.Millisecond)
-	var sb [4096]byte
-	//发送自动订阅指令
-	v.Conn.Write([]byte(string(jsonb) + "\x00"))
-	_, _ = v.Conn.Read(sb[0:])
-	for {
-		time.Sleep(2000 * time.Millisecond)
-		readSize2, _ := v.Conn.Read(sb[0:])
-		s := string(sb[0:readSize2])
-		return s
+	if msg.Result {
+		return "操作成功"
+	} else {
+		return "操作失败"
 	}
 }
 
