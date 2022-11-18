@@ -102,7 +102,7 @@ func demo2(c *gin.Context) {
 	courtId := c.Query("courtId")
 	e := methods.Devicelocation(courtId)
 	c.JSON(http.StatusOK, gin.H{
-		"msg": e,
+		"msg": e.Result,
 	})
 }
 func demo3(c *gin.Context) {

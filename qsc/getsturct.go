@@ -197,6 +197,7 @@ func DevicePosition(courtid string) Returnmsg {
 
 func Send(sendMsg string) string {
 	v := tools.NetTcp()
+	fmt.Println(sendMsg)
 	var msg Returnmsg
 	v.Conn.Write([]byte(string(sendMsg) + "\x00"))
 	var x [1024]byte
