@@ -47,6 +47,11 @@ type Returnmsg struct {
 	Id      int    `json:"id"`
 }
 
+var (
+	onlineUrl  = "http://localhost:8088/receive/online?courtId="
+	outLineUrl = "http://localhost:8088/receive/outline?courtId="
+)
+
 // 接收订阅内容（服务器时间，法院状态等）
 type recvglobaldata struct {
 	Jsonrpc string               `json:"jsonrpc"`
@@ -136,8 +141,10 @@ func GetGlobalData() {
 							str = fmt.Sprintf("%v", v["String"])
 							if str == "true" {
 								log.Println("设备ID：" + slic[0] + "上线")
+								http.Get(onlineUrl + slic[0])
 							} else {
 								log.Println("设备ID：" + slic[0] + "离线")
+								http.Get(outLineUrl + slic[0])
 							}
 						} else if slic[0] == "core.Status.out" {
 							str = fmt.Sprintf("%v", v["String"])
