@@ -140,11 +140,11 @@ func GetGlobalData() {
 						if slic[0] == "tcp.status" {
 							str = fmt.Sprintf("%v", v["String"])
 							if str == "true" {
-								log.Println("设备ID：" + slic[0] + "上线")
-								http.Get(onlineUrl + slic[0])
+								log.Println("设备ID：" + slic[1] + "上线")
+								http.Get(onlineUrl + slic[1])
 							} else {
-								log.Println("设备ID：" + slic[0] + "离线")
-								http.Get(outLineUrl + slic[0])
+								log.Println("设备ID：" + slic[1] + "离线")
+								http.Get(outLineUrl + slic[1])
 							}
 						} else if slic[0] == "core.Status.out" {
 							str = fmt.Sprintf("%v", v["String"])
