@@ -504,7 +504,7 @@ func DeviceInfor(ctx *gin.Context) {
 
 func Run() {
 	go GetGlobalData()
-	go MonitorPageState()
+	//go MonitorPageState()
 	//DevicePosition()
 	//RemoteListen(true)
 	//ChannelLevel()

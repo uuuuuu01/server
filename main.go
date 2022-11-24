@@ -150,7 +150,7 @@ func send(c *gin.Context) {
 }
 
 func main() {
-	qsc.GetGlobalData()
+	qsc.Run()
 	r := setUp()
 	r.GET("/demo", demo1)
 	r.GET("/demo2", demo2)
